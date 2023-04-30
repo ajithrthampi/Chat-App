@@ -8,7 +8,7 @@ import { AuthContext } from "./context/AuthContext";
 function App() {
     
     const {currentUser} = useContext(AuthContext)
-    // console.log("User",currentUser);
+    console.log("ENV file", process.env);
 
     const ProtectedRoute =  ({children}) => {
         if(!currentUser){
