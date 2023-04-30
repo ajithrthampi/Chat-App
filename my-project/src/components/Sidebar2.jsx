@@ -9,7 +9,7 @@ const Sidebar2 = () => {
 
     const {currentUser} = useContext(AuthContext)
     if(currentUser){
-         console.log("User home",currentUser);
+        //  console.log("User home",currentUser);
     }
     
     return (

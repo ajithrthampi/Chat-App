@@ -1,44 +1,80 @@
-import React from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import profilepic2 from "../images/profilepic2.jpg"
+import { AuthContext } from '../context/AuthContext';
+import { ChatContext } from '../context/ChatContext';
 
-const Message = () => {
+const Message = ({  message}) => {
+
+    // console.log("Messages", message);
+    const {currentUser} = useContext(AuthContext)
+    const {data} = useContext(ChatContext)
+    // console.log("data",data);
+
+    const ref = useRef()
+
+    useEffect(() => {
+      ref.current?.scrollIntoView({ behavior:"smooth" })
+    }, [message])
+
     return (
         <> {/* Large Screen */}
-            <div className=' py-3 gap-5 '>
-                <div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen ">
+            <div className=' py-3 gap-5 ' ref={ref}>
+                <div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-scree ">
                     <div id="messages" className=" scrollbar-hide flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+                        {
+                            message.senderId === currentUser.uid ? 
                         <div className="chat-message">
                             <div className="flex items-end">
                                 <div className="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-2 items-start">
-                                    <div className='flex flex-col gap-4'>
-                                        <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">Can be verified on any platform using docker</span>
-                                        <div>
-                                            <img className='w-[50%] rounded-md' src="https://images.pexels.com/photos/13962287/pexels-photo-13962287.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt=""/>
+                                    <div className='flex flex-col gap-3'>
+                                        {
+                                            message.text && <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">{message?.text}</span>
+                                        }
+                                        
+                                        {
+                                            message.img &&   <div>
+                                            <img className='w-60 object-cover' src={message.img} alt=""/>
                                         </div>
+                                        }
+                                      
                                     </div>
                                 </div>
-                                <img className="w-14 h-14 rounded-full order-1" src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile"/>
+                                {
+                                    message &&  <img className="w-14 h-14 rounded-full object-cover order-1" src={currentUser.photoURL} alt="My profile"/>
+                                }
+                               
                             </div>
                         </div>
+                            :
                         <div className="chat-message">
                             <div className="flex items-end justify-end">
                                 <div className="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-1 items-end">
-                                    <div className=' flex flex-col gap-4'>
-                                        <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">Your error message says permission denied, npm global installs must be given root privileges.</span>
-                                        <div> {/* <img classNameName='w-[50%] rounded-md' src="https://images.pexels.com/photos/13962287/pexels-photo-13962287.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt=""/> */} </div>
+                                    <div className=' flex flex-col gap-3'>
+                                        {
+                                            message.text &&   <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">{message?.text}</span>
+                                        }
+                                      
+                                      
+                                            { 
+                                                message.img &&   <div> 
+                                                    <img className='w-60 object-cover rounded-md'  src={message.img} alt=""/> 
+                                                </div>
+                                            }
                                     </div>
                                 </div>
-                                <img className="w-14 h-14 rounded-full order-1" src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile"/>
+                                {
+
+                                }
+                                <img className="w-14 h-14 rounded-full order-1 object-cover" src={data.user.photoURL} alt="all profile"/>
                             </div>
-                        </div>
+                        </div>   
+                        }
                     </div>
                 </div>
             </div>
 
             {/* Mobile Screen */}
-            <div>
-
-            </div>
+            <div></div>
 
         </>
     )
