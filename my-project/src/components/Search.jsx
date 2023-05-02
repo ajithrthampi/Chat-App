@@ -3,6 +3,7 @@ import profilepic3 from "../images/profilepic3.jpg"
 import {collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, updateDoc, where} from "firebase/firestore";
 import {db} from '../firebase';
 import { AuthContext } from '../context/AuthContext';
+import {FcAddImage} from 'react-icons/fc';
 
 const Search = () => {
 
@@ -74,9 +75,10 @@ const Search = () => {
 
     return (
         <>
-            <div className='md:pr-20 md:pl-5 p-5 md:pt-0 pt-7'>
+            <div className='md:pr-20 md:pl-5 p-5 md:pt-0 pt-7 '>
+               
                 <input 
-                 className="w-full placeholder:font-italitc border relative md:bg-gray-100 bg-gray-300  placeholder-black drop-shadow-md md:rounded-2xl rounded-lg py-2 pl-3 pr-10 focus:outline-none"
+                 className="w-full placeholder:font-italitc border relative md:bg-gray-100   placeholder-gray-400 drop-shadow-md md:rounded-2xl rounded-lg md:py-2 py-4 pl-3 pr-10 focus:outline-none"
                  placeholder="Search user"
                  type="text"
                  value={username}
@@ -85,6 +87,7 @@ const Search = () => {
                         e => setUsername(e.target.value)
                     }
                    />
+                   
    
              {err ?  <span className='bg-green-600'>user not found</span> : ""}
            
@@ -95,10 +98,10 @@ const Search = () => {
           {
             user && 
             <div className='
-            fixed bg-black bg-opacity-25 backdrop-blur-sm
-            md:fle justify-center items-center pt-20 md:pt-0 z-20 w-[27%]
+            fixed bg-black bg-opacity-25 backdrop-blur-sm 
+            md:fle justify-center items-center z-20 md:w-[27%] w-full 
             '>
-            <div className=' flex items-center p-5 gap-3 bg-gray-200  cursor-pointer  ' onClick={handleSelect}>
+            <div className=' flex items-center p-2 gap-3 bg-gray-200  cursor-pointer  ' onClick={handleSelect}>
                 <img className='h-16 w-16 bg-red-400 rounded-full object-cover'
                     src={
                         user.photoURL

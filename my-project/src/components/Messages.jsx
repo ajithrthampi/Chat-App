@@ -20,7 +20,7 @@ const Messages = () => {
       unSub()
     }
   },[data.chatId])
-console.log("2222222222222222222222222",messages);
+// console.log("2222222222222222222222222",messages);
     return (
         <>
             <div className=' 2xl:h-[550px] md:h-[430px] xl:h-[420px] overflow-scroll scrollbar-hide  '>

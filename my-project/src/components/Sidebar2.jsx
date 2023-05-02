@@ -29,7 +29,7 @@ const Sidebar2 = () => {
             </div>
 
             {/* Small Screen */}
-            <div className='md:hidden '>
+            <div className='md:hidden bg-gray-100'>
                <Search/>
                <ChatsUser/>
             </div>
