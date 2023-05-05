@@ -5,10 +5,12 @@ import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 import {auth, db, storage} from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore"; 
+import SplashScreen from './SplashScreen';
 
 const Register = () => {
 
     const [err, setErr] = useState(false)
+    const [show, setShow] = useState(false)
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
@@ -28,18 +30,6 @@ const Register = () => {
             const uploadTask = uploadBytesResumable(storageRef, file);
 
             uploadTask.on('state_changed', (snapshot) => {
-
-            //  // Image Upload peeentage. righ NOW NOT NEEDED
-            //     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            //     console.log('Upload is ' + progress + '% done');
-            //     switch (snapshot.state) {
-            //         case 'paused':
-            //             console.log('Upload is paused');
-            //             break;
-            //         case 'running':
-            //             console.log('Upload is running');
-            //             break;
-            //     }
             }, (error) => {
                 setErr(true)
             },
@@ -60,8 +50,10 @@ const Register = () => {
                   // user Chat Collection
                   await setDoc(doc(db, "userChat", res.user.uid), {})
                   navigate("/")
+                 
                 });
             });
+            
 
         } catch (error) {
             setErr(true)
@@ -72,7 +64,8 @@ const Register = () => {
     return (
 
         <>
-            <section className="b h-screen w-screen flex items-center justify-center  bg-gradient-to-r from-[#191819] to-[#3d3d3d] md:px-0 px-4">
+       
+            <section className="b h-screen w-screen flex items-center justify-center  bg-gradient-to-r from-[#6753FC] to-[#3d3d3d] md:px-0 px-4">
 
                 <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5   items-center">
                     <div className="md:w-1/2 px-8 md:px-16">

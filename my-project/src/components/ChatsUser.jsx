@@ -42,7 +42,7 @@ const ChatsUser = () => {
     const handleSelect = (u) => {
         dispatch({type: "CHANGE_USER", payload: u})
         // navigate("/chat")
-        dispatch1({type: "TOGLE_MODAL", payload: "defaultModal"})
+        // dispatch({type: "TOGLE_MODAL", payload: "defaultModal"})
     }
 
     return (

@@ -22,7 +22,7 @@ const SplashScreen = ({loading}) => {
                 {
                 currentUser ? 
                 <>
-                <h1 className='text-white font-perif text-xl'>Loading please wait..</h1>
+                <h1 className='text-white font-perif text-xl'>Loading please wait...</h1>
                 </>
                  : 
                  <>

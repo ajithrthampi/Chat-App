@@ -1,16 +1,32 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {ChatContext} from '../context/ChatContext'
 import {SlArrowLeft} from 'react-icons/sl'
 
 const MobileNav = () => {
+    const [state, setState] = useState("")
     const {data} = useContext(ChatContext)
+    const {dispatch} = useContext(ChatContext)
+    // if(data){
+    //     setState(data)
+    // }
+    useEffect(() => {
+        if(data){
+            setState(data)
+        }
+    }, [data])
+    console.log("Nav value", state);
+ 
+    const handleClose = () => {
+        dispatch({type: "TOGLE_MODAL", })
+    }
+
     return (
         <> {
-            data ?. user ?. displayName ? <>
+            state ?. user ?. displayName ? <>
                 <div className='md:hidden '>
                     <div className='w-full fixed  flex  items-center bg-white py-3 rounded-br-3xl rounded-bl-3xl  top-0 z-30 '>
                         <div className=' flex justify-center items-center gap-7 px-5 h-full'>
-                            <div className='text-lg '>
+                            <div className='text-lg ' onClick={handleClose}>
                                 <SlArrowLeft />
                             </div>
                             <div className='flex gap-3'>

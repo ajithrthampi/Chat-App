@@ -2,31 +2,38 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase';
+import SplashScreen from './SplashScreen';
 
 const Login = () => {
 
   const [err, setErr] = useState(false)
+  const [show, setShow] = useState(false)
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
       e.preventDefault()
+      // setShow(true)
       const email = e.target[0].value;
       console.log(email);
       const password = e.target[1].value;
       // Create User with email and password
+    
       try {
         await signInWithEmailAndPassword(auth, email, password)
+       
         navigate("/")
-        console.log("asfasfaf");
       } catch (error) {
-          setErr(true)
+         
           console.log("errrrrrr",error);
+          
       }
   }
 
   return (
     <>
-       <section className="b h-screen  flex items-center justify-center  bg-gradient-to-r from-[#191819] to-[#3d3d3d] md:px-0 px-4">
+       
+
+       <section className="b h-screen  flex items-center justify-center  bg-gradient-to-r from-[#6753FC] to-[#3d3d3d] md:px-0 px-4">
               <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5   items-center">
                 <div className="md:w-1/2 px-8 md:px-16">
                 {
@@ -54,9 +61,19 @@ const Login = () => {
                       placeholder="password"
                     //   onChange={handleChange}
                     />
-                    <button className="bg-[#0d3980] rounded-xl text-white py-2 hover:scale-105 duration-300"
-                    //   onClick={submit}
+                    {
+                      show ? 
+                      <>
+                          <h1>Loading </h1>
+                      </>
+                       :
+                       <>
+                        <button className="bg-[#0d3980] rounded-xl text-white py-2 hover:scale-105 duration-300"
+                  
                     >Login</button>
+                       </>
+                    }
+                   
                   </form>
 
                   <div className="mt-5 text-xs border-b border-[#002D74] py-4 text-[#002D74]">

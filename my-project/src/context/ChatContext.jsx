@@ -22,12 +22,13 @@ export const ChatContextProvider = ({children}) => {
                     user:action.payload,
                     chatId : currentUser.uid > action.payload.uid ? currentUser.uid + action.payload.uid : action.payload.uid + currentUser.uid
                 }
-                // case "TOGLE_MODAL": 
-                // return {
-                //    showModal:action.payload
+                case "TOGLE_MODAL": 
+                return {
+                    user:{},
+                    chatId : "null"
                    
-                // }
-                // // console.log(showModal);
+                }
+                // console.log(showModal);
             default:
                 return state;
         }
