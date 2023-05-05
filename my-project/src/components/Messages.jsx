@@ -5,6 +5,7 @@ import bg from "../images/bg.jpg"
 import { ChatContext } from '../context/ChatContext'
 import { doc, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase'
+import MobileNav from './MobileNav'
 
 
 const Messages = () => {
@@ -20,16 +21,22 @@ const Messages = () => {
       unSub()
     }
   },[data.chatId])
-// console.log("2222222222222222222222222",messages);
+
     return (
         <>
-            <div className=' 2xl:h-[550px] md:h-[430px] xl:h-[420px] overflow-scroll scrollbar-hide  '>
+        <div className='h-screen md:h-full'>
+         <MobileNav/>
+            <div className=' 2xl:h-[550px] md:h-[430px] xl:h-[420px] md:overflow-scroll md:scrollbar-hide  overflow-scroll h-full md:mb-0 md:pb-5 pb-20  md:pt-0 pt-20  bg-gray-200 '>
               {
               messages.map(m => (
+                <>
+               
                  <Message message={m} key={m.id}/>
+                 </>
               ))
               }
                
+            </div>
             </div>
         </>
     )

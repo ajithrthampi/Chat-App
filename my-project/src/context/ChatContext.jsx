@@ -10,22 +10,32 @@ export const ChatContextProvider = ({children}) => {
     const {currentUser} = useContext(AuthContext)
     const INITIAL_STATE = {
         chatId: "null",
-        user: {}
+        user: {},
+        showModal:""
+
     }
     const chatReducer = (state, action) => {
+        
         switch (action.type) {
             case "CHANGE_USER":
                 return {
                     user:action.payload,
                     chatId : currentUser.uid > action.payload.uid ? currentUser.uid + action.payload.uid : action.payload.uid + currentUser.uid
                 }
+                // case "TOGLE_MODAL": 
+                // return {
+                //    showModal:action.payload
+                   
+                // }
+                // // console.log(showModal);
             default:
                 return state;
         }
     }
+    
 
     const [state, dispatch] = useReducer(chatReducer, INITIAL_STATE)
-
+    console.log("Satet context ccccc",state);
     return (
         <ChatContext.Provider value={{ data: state, dispatch}}>
             {children}
