@@ -24,7 +24,7 @@ export const MessageContextProvider = ({children}) => {
     // console.log("ihi",INITIAL_STATE.showModal);
 
     const [state, dispatch1] = useReducer(messageReducer, INITIAL_STATE)
-    console.log("Satet context",state);
+    // console.log("Satet context",state);
     return (
         <MessageContext.Provider value={{ chatValue : state, dispatch1}}>
              {children}

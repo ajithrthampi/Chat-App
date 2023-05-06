@@ -14,7 +14,7 @@ const MobileNav = () => {
             setState(data)
         }
     }, [data])
-    console.log("Nav value", state);
+    // console.log("Nav value", state);
  
     const handleClose = () => {
         dispatch({type: "TOGLE_MODAL", })

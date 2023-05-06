@@ -5,11 +5,11 @@ import {AuthContext} from '../context/AuthContext';
 const SplashScreen = ({loading}) => {
 
     const {currentUser} = useContext(AuthContext)
-    console.log("curenrUser",currentUser);
+    
 
     return (
         <>
-            <div className='bg-[#6753FC] h-screen w-screen flex flex-col items-center justify-center'>
+            <div className='bg-[#7969f3] h-screen w-screen flex flex-col items-center justify-center'>
                 <div className=' '>
                     <ClipLoader color={"white"}
                         loading={loading}

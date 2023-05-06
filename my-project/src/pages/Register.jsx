@@ -11,6 +11,7 @@ const Register = () => {
 
     const [err, setErr] = useState(false)
     const [show, setShow] = useState(false)
+    const [profilePic, setProfilePic] = useState('')
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
@@ -19,6 +20,10 @@ const Register = () => {
         const email = e.target[1].value;
         const password = e.target[2].value;
         const file = e.target[3].files[0];
+
+        // console.log("Image", file);
+      
+        
 
         // Create User with email and password
         try {
@@ -35,7 +40,7 @@ const Register = () => {
             },
              () => {
                 getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
-                    // console.log('File available at', downloadURL);
+                    
                     await updateProfile(res.user, {
                       displayName,
                       photoURL: downloadURL
@@ -59,7 +64,13 @@ const Register = () => {
             setErr(true)
         }
     }
-
+    const handleImageUpload = (e) => {
+        const Image = e.target.files[0]
+        // console.log("[p[p[p[p[p[p", Image);
+        
+        setProfilePic(URL.createObjectURL(e.target.files[0]))
+    }
+    console.log("Profile pic", profilePic);
 
     return (
 
@@ -68,7 +79,11 @@ const Register = () => {
             <section className="b h-screen w-screen flex items-center justify-center  bg-gradient-to-r from-[#6753FC] to-[#3d3d3d] md:px-0 px-4">
 
                 <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5   items-center">
+                   
                     <div className="md:w-1/2 px-8 md:px-16">
+                    <div className='bg-red-400 w-full'>
+                       
+                    </div>
                         {
                         err ? <span className='text-red-500'>Something went wrong</span> : ""
                     }
@@ -103,10 +118,24 @@ const Register = () => {
                                 </svg>
                             </div>
 
-                            <input className='hidden' type="file" id="file"/>
+                            <input className='hidden' type="file" id="file" onChange={handleImageUpload}/>
                             <label htmlFor="file" className='flex items-center gap-2 font-normal text-sm'>
-                                <FcAddImage size={28}/>
-                                <span className='text-[#89BDD6] text-base'>Add an avatar</span>
+                              
+                                     {
+                                        profilePic && profilePic ? 
+                                        <>
+                                        <img className='w-10 h-10 rounded-full object-cover'  src={profilePic} alt="" />
+                                        <div className='font-perifpp text-xs text-gray-600'>Change image</div>
+                                        </> 
+                                         :
+                                         <>
+                                         <FcAddImage size={28}/>
+                                <span className='text-[#89BDD6] text-base'>Add an Image</span>
+                                         </>
+                                     }
+                                       
+                            
+                                
                             </label>
                             <button className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300">Login</button>
                         </form>

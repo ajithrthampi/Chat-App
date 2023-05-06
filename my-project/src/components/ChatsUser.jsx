@@ -55,7 +55,7 @@ const ChatsUser = () => {
                 {
                 Object.entries(chats)?.sort((a,b) => b[1].date - a[1].date).map(chat => (
                     <div className='flex justify-between md:items-center pr-5 bg-white md:bg-inherit rounded-xl md:mt-0 mt-3 ' key={chats[0]} onClick={() => handleSelect(chat[1].userInfo)}>
-                        <div className=' flex   pl-5 p-3 md:gap-3 gap-2 '>
+                        <div className=' flex   pl-5 p-3 md:gap-3 gap-2 cursor-pointer'>
                             <img className='md:h-16 md:w-16 h-14 w-14 bg-red-400 rounded-full object-cover'
                                 src={chat[1]?.userInfo?.photoURL}
                                 alt="sdf"/>

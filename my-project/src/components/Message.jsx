@@ -21,7 +21,7 @@ const Message = ({message}) => {
     const {currentUser} = useContext(AuthContext)
     const {data} = useContext(ChatContext)
     const {chatValue} = useContext(MessageContext)
-    console.log("value", chatValue);
+    // console.log("value", currentUser.p);
 
     const ref = useRef()
 
@@ -41,13 +41,13 @@ const Message = ({message}) => {
                     <div id="messages" className=" md:pt-0  p-2  scrollbar-hide flex flex-col   overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
 
                         {
-                        message.senderId === currentUser.uid ?
+                            message.senderId === currentUser.uid ?
                         <div className="chat-message">
                         <div className="flex items-end justify-end">
                             <div className="flex flex-col space-y- text-sm max-w-xs mx-2 order-1 items-end">
                                 <div className=' flex flex-co gap-3 '>
                                     {
-                                    message.text && <span className="px-5 py-2   inline-block rounded-tr-xl rounded-tl-xl font-perifpp rounded-bl-xl bg-[#6753FC] text-white ">
+                                    message.text && <span className="px-5 py-2   inline-block rounded-tr-xl rounded-tl-xl font-perifpp rounded-bl-xl bg-[#7969f3] text-white ">
                                         {
                                         message ?. text
                                     }</span>
@@ -66,7 +66,8 @@ const Message = ({message}) => {
                             {}
                             <img className="w-14 h-14 rounded-full order-1 object-cover hidden md:block"
                                 src={
-                                    data.user.photoURL
+                                    // data.user.photoURL
+                                    currentUser.photoURL
                                 }
                                 alt="all profile"/>
                         </div>
@@ -96,7 +97,8 @@ const Message = ({message}) => {
                                 {
                                 message && <img className="w-14 h-14 rounded-full object-cover order-1 hidden md:block"
                                     src={
-                                        currentUser.photoURL
+                                        // currentUser.photoURL
+                                        data.user.photoURL
                                     }
                                     alt="My profile"/>
                                 }

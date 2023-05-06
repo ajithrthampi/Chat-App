@@ -19,6 +19,7 @@ const Input = () => {
 
     const [text, setText] = useState("")
     const [img, setImg] = useState(null)
+    const [profilePic, setProfilePic] = useState('')
 
     const {currentUser} = useContext(AuthContext)
     const {data} = useContext(ChatContext)
@@ -68,7 +69,26 @@ const Input = () => {
         });
         setText("")
         setImg(null)
+        setProfilePic("")
     }
+
+    //Show Uploaded Image
+    // const handleImageUpload = (e) => {
+    //     const Image = e.target.files[0]
+    //     console.log("Added dimage message",Image);
+    // }
+    // console.log("Added dimage message",img);
+
+    const handleImage = (e) => {
+        const Image = e.target.files[0]
+        console.log("Added dimage message",e.target.files[0]);
+       
+        setImg(e.target.files[0])
+        setProfilePic(URL.createObjectURL(e.target.files[0]))
+
+        
+    }
+    console.log("show image", profilePic);
     
 
     return (
@@ -83,10 +103,21 @@ const Input = () => {
                             value={text}/>
                         <input className='hidden' type="file" id="file"
                             onChange={
-                                e => setImg(e.target.files[0])
+                                // e => setImg(e.target.files[0])
+                                handleImage
                             }/>
-                        <label htmlFor="file" className=' text-3xl'>
-                            <FcAddImage/>
+                        <label htmlFor="file" className=' text-3xl '>
+                            {
+                                profilePic && profilePic ? 
+                                <>
+                                <img className='w-10 h-10 flex justify-center items-center rounded-full object-cover' src={profilePic} alt="" />
+                                </> 
+                                :
+                                <>
+                                  <FcAddImage/>
+                                </>
+                            }
+                          
                         </label>
                         <button className=' bg-black text-white px-5 rounded-md '
                             onClick={handleSend}><MdSend/></button>
@@ -102,14 +133,29 @@ const Input = () => {
                                 <input className='rounded-full bg-gray-100 pr-24 px-3 py-7 w-full h-10 ' type="text" placeholder='type here'
                                     onChange={
                                         e => setText(e.target.value)
-                                    }/>
+                                    }
+                                    value={text}
+                                    />
 
                                 <input className='hidden' type="file" id="file"
                                     onChange={
-                                        e => setImg(e.target.files[0])
-                                    }/>
-                                <label htmlFor="file" className=' text-3xl absolute bottom-3 right-16'>
-                                    <FcAddImage size={25}/>
+                                        // e => setImg(e.target.files[0])
+                                        handleImage
+                                    }
+                                  />
+                                <label htmlFor="file" className=' text-3xl absolute bottom-3 right-16'
+                                >
+                                    {
+                                        profilePic && profilePic ? 
+                                        <>
+                                              <img className='w-7 h-7 rounded-full object-cover' src={profilePic} alt="" />
+                                        </>
+                                         :
+                                         <>
+                                          <FcAddImage size={25}/>
+                                         </>
+                                    }
+                                  
                                 </label>
                                 <div className=' absolute bottom-3 right-5 text-gray-400 '
                                     onClick={handleSend}>
